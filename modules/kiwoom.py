@@ -1,5 +1,5 @@
 """
-AX RADAR v5.2 - Kiwoom REST API Module
+AX RADAR v5.3 - Kiwoom REST API Module
 TokenManager + KiwoomAPI + KiwoomLogic
 """
 import json

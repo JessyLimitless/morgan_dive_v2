@@ -1,6 +1,6 @@
 """
-AX RADAR v5.2 - Flask Application
-Daily Radar — Market Pulse + Foreign + Institution + Report
+AX RADAR v5.3 - Flask Application
+Summary + Market Pulse + Foreign + Sector + Institution + Accumulation + Program
 """
 import logging
 import os
@@ -27,7 +27,7 @@ content = ContentManager()
 hong_scanner = HongSignalScanner(kiwoom)
 accumulation_engine = AccumulationEngine(kiwoom)
 
-logger.info(f"AX RADAR v5.2 | Kiwoom: {'LIVE' if kiwoom.connected else 'DISCONNECTED'}")
+logger.info(f"AX RADAR v5.3 | Kiwoom: {'LIVE' if kiwoom.connected else 'DISCONNECTED'}")
 
 # ═══════════════════════════════════════════════════════════════════
 #  Main Page

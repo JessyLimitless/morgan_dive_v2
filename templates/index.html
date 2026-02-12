@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>AX RADAR v5.2</title>
+<title>AX RADAR v5.3</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ================================================================
-   AX RADAR v5.2 — Market Pulse + Foreign Flow + Institution Desk + Daily Radar
+   AX RADAR v5.3 — Market Pulse + Foreign Flow + Institution Desk + Daily Radar
    Light · Indigo Accent · Ambient Motion · Editorial Layout
    ================================================================ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -388,57 +388,6 @@ body::before{
 .sector-tab:hover{color:var(--tx-2)}
 .sector-tab.active{background:var(--bg-card);color:var(--c-accent);box-shadow:var(--s-sm)}
 
-/* ── IB Sector Flow ── */
-.ib-sector-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
-.ib-sector-col{padding:18px 22px}
-.ib-sector-col:not(:last-child){border-right:1px solid var(--b-light)}
-.ib-sector-col-hd{
-  display:flex;align-items:center;gap:10px;margin-bottom:14px;
-  padding-bottom:10px;border-bottom:2px solid var(--b-default);
-}
-.ib-sector-col-hd .ib-col-logo{width:30px;height:30px;font-size:11px}
-.ib-sector-col-hd .ib-col-nm{font-family:var(--f-display);font-size:.85rem;font-weight:700;color:var(--tx-1)}
-.ib-sector-chart{max-height:500px;overflow-y:auto;scrollbar-width:thin}
-.ibs-row{
-  display:flex;align-items:center;gap:0;
-  padding:5px 0;border-bottom:1px solid var(--b-light);
-  transition:background .15s var(--ease);
-}
-.ibs-row:last-child{border-bottom:none}
-.ibs-row:hover{background:var(--c-accent-bg)}
-.ibs-nm{
-  width:68px;flex-shrink:0;text-align:right;padding-right:10px;
-  font-family:var(--f-body);font-size:.78rem;font-weight:600;
-  color:var(--tx-1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.ibs-bar-wrap{
-  flex:1;display:flex;align-items:center;gap:0;
-  position:relative;height:20px;
-}
-.ibs-bar-left{flex:1;display:flex;justify-content:flex-end;align-items:center;height:100%;position:relative}
-.ibs-bar-right{flex:1;display:flex;justify-content:flex-start;align-items:center;height:100%;position:relative}
-.ibs-axis{width:1px;height:24px;background:var(--tx-3);opacity:.25;flex-shrink:0}
-.ibs-bar{
-  height:14px;border-radius:2px;min-width:2px;
-  transition:width .6s cubic-bezier(.22,1,.36,1);
-}
-.ibs-bar.buy{background:linear-gradient(90deg,rgba(220,38,38,.15),rgba(220,38,38,.55));margin-left:3px}
-.ibs-bar.sell{background:linear-gradient(270deg,rgba(37,99,235,.15),rgba(37,99,235,.55));margin-right:3px}
-.ibs-amt{
-  width:64px;flex-shrink:0;text-align:right;padding-left:6px;
-  font-family:var(--f-mono);font-size:.72rem;font-weight:700;
-  font-variant-numeric:tabular-nums;
-}
-.ibs-amt.buy{color:var(--c-up)}.ibs-amt.sell{color:var(--c-down)}.ibs-amt.zero{color:var(--tx-3)}
-
-@media(max-width:1024px){
-  .ib-sector-cols{grid-template-columns:1fr}
-  .ib-sector-col:not(:last-child){border-right:none;border-bottom:1px solid var(--b-light)}
-}
-@media(max-width:768px){
-  .ibs-nm{width:56px;font-size:.72rem}
-  .ibs-amt{width:56px;font-size:.68rem}
-}
 
 
 /* ================================================================
@@ -850,128 +799,6 @@ body::before{
 .guide-text strong{color:var(--tx-1);font-weight:700}
 
 /* ================================================================
-   HONG SIGNAL RADAR — 수급 주도주 전략
-   ================================================================ */
-.signal-sec{padding:20px 0 10px}
-.signal-card{
-  background:var(--bg-card);border:1px solid var(--b-light);
-  border-radius:var(--r-lg);overflow:hidden;
-  position:relative;animation:fadeUp .35s var(--ease) backwards;
-  box-shadow:var(--shadow-card);
-}
-.signal-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,#F59E0B,#EF4444,#8B5CF6,#4F46E5);
-}
-.signal-card__head{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:16px 26px 14px;border-bottom:1px solid var(--b-light);
-}
-.signal-card__title{
-  font-family:var(--f-mono);font-size:11px;font-weight:700;
-  color:var(--tx-3);text-transform:uppercase;letter-spacing:1.8px;
-  display:flex;align-items:center;gap:8px;
-}
-.signal-card__badge{
-  font-family:var(--f-mono);font-size:9px;font-weight:800;
-  padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:1px;
-}
-.signal-card__badge.live{background:rgba(5,150,105,.08);color:#059669;border:1px solid rgba(5,150,105,.15)}
-.signal-card__badge.off{background:var(--bg-card-2);color:var(--tx-3);border:1px solid var(--b-light)}
-.signal-card__right{display:flex;align-items:center;gap:8px}
-.signal-card__time{
-  font-family:var(--f-mono);font-size:.74rem;color:var(--tx-3);
-  background:var(--bg-card-2);padding:4px 10px;border-radius:4px;
-  border:1px solid var(--b-light);font-variant-numeric:tabular-nums;
-}
-.signal-card__body{
-  display:grid;grid-template-columns:260px 1fr 1fr;gap:0;
-  min-height:180px;
-}
-.signal-panel{padding:20px 24px;position:relative}
-.signal-panel:not(:last-child){border-right:1px solid var(--b-light)}
-.sp-label{
-  font-family:var(--f-mono);font-size:10px;font-weight:700;
-  color:var(--tx-3);text-transform:uppercase;letter-spacing:1.5px;
-  margin-bottom:14px;display:flex;align-items:center;gap:6px;
-}
-.sp-trend{
-  font-family:var(--f-display);font-size:1.15rem;font-weight:800;
-  margin-bottom:10px;letter-spacing:-.3px;
-}
-.sp-trend.accel{color:#D97706}
-.sp-trend.positive{color:#059669}
-.sp-trend.flat{color:var(--tx-3)}
-.sp-trend.negative{color:#DC2626}
-.sp-trend.nodata{color:var(--tx-3)}
-.sp-gauge-wrap{
-  height:6px;background:var(--bg-card-2);border-radius:3px;
-  overflow:hidden;margin-bottom:14px;border:1px solid var(--b-light);
-}
-.sp-gauge{height:100%;border-radius:3px;transition:width .8s cubic-bezier(.22,1,.36,1)}
-.sp-gauge.accel{background:linear-gradient(90deg,#F59E0B,#EF4444)}
-.sp-gauge.positive{background:linear-gradient(90deg,#10B981,#059669)}
-.sp-gauge.flat{background:var(--tx-3)}
-.sp-gauge.negative{background:linear-gradient(90deg,#EF4444,#DC2626)}
-.sp-stats{display:flex;gap:20px}
-.sp-stat{display:flex;flex-direction:column;gap:3px}
-.sp-sl{font-family:var(--f-mono);font-size:9px;color:var(--tx-3);text-transform:uppercase;letter-spacing:.8px;font-weight:600}
-.sp-sv{font-family:var(--f-mono);font-size:.88rem;font-weight:700;color:var(--tx-1);font-variant-numeric:tabular-nums}
-.sp-sectors{display:flex;flex-direction:column;gap:6px;max-height:200px;overflow-y:auto;scrollbar-width:thin}
-.sp-sector-tag{
-  display:flex;align-items:center;gap:10px;
-  padding:9px 14px;border-radius:var(--r-sm);
-  background:var(--bg-card-2);border:1px solid var(--b-light);
-  transition:all .2s var(--ease);cursor:default;
-}
-.sp-sector-tag:hover{border-color:var(--c-accent-border);background:var(--c-accent-bg)}
-.sp-sector-nm{font-family:var(--f-body);font-size:.84rem;font-weight:600;color:var(--tx-1);flex:1}
-.sp-sector-cnt{
-  font-family:var(--f-mono);font-size:10px;font-weight:800;
-  background:var(--c-accent);color:#fff;
-  padding:2px 8px;border-radius:10px;min-width:22px;text-align:center;flex-shrink:0;
-}
-.sp-sector-stocks{
-  font-family:var(--f-mono);font-size:.68rem;color:var(--tx-3);
-  padding:0 14px 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.sp-stocks{display:flex;flex-direction:column;gap:3px;max-height:200px;overflow-y:auto;scrollbar-width:thin}
-.sp-stk{
-  display:flex;align-items:center;gap:8px;
-  padding:8px 12px;border-radius:6px;
-  cursor:pointer;transition:all .2s var(--ease);
-}
-.sp-stk:hover{background:var(--c-accent-bg)}
-.sp-lvl{
-  font-family:var(--f-mono);font-size:8px;font-weight:800;
-  padding:2px 6px;border-radius:3px;text-transform:uppercase;letter-spacing:.5px;
-  flex-shrink:0;min-width:48px;text-align:center;
-}
-.sp-lvl.strong{background:rgba(245,158,11,.12);color:#B45309;border:1px solid rgba(245,158,11,.2)}
-.sp-lvl.active{background:rgba(5,150,105,.08);color:#047857;border:1px solid rgba(5,150,105,.15)}
-.sp-lvl.watch{background:var(--bg-card-2);color:var(--tx-3);border:1px solid var(--b-light)}
-.sp-stk-nm{flex:1;font-size:.84rem;font-weight:600;color:var(--tx-1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sp-stk-sec{font-family:var(--f-mono);font-size:.68rem;color:var(--tx-3);flex-shrink:0}
-.sp-stk-val{
-  font-family:var(--f-mono);font-size:.76rem;font-weight:700;
-  flex-shrink:0;min-width:42px;text-align:right;font-variant-numeric:tabular-nums;
-}
-.sp-stk-val.up{color:var(--c-up)}.sp-stk-val.dn{color:var(--c-down)}
-@keyframes signalBlink{
-  0%,100%{opacity:1;text-shadow:none}
-  50%{opacity:.3;text-shadow:0 0 14px rgba(245,158,11,.7)}
-}
-.sp-stk.explosive{animation:signalBlink .7s ease-in-out infinite}
-.sp-stk.explosive .sp-stk-nm{color:#B45309;font-weight:700}
-.sp-empty{font-family:var(--f-mono);font-size:.78rem;color:var(--tx-3);text-align:center;padding:28px 12px}
-
-@media(max-width:1024px){
-  .signal-card__body{grid-template-columns:1fr;gap:0}
-  .signal-panel:not(:last-child){border-right:none;border-bottom:1px solid var(--b-light)}
-}
-
-
-/* ================================================================
    STEALTH ACCUMULATION ZONE
    ================================================================ */
 .stealth-zone{
@@ -1157,10 +984,9 @@ body::before{
 <header class="header">
   <div class="header__brand">
     <h1>AX RADAR</h1>
-    <span class="ver">v5.2</span>
+    <span class="ver">v5.3</span>
   </div>
   <nav class="header__nav">
-    <a class="nav-link active" data-target="radar" onclick="navTo('radar')">Daily Radar</a>
   </nav>
   <div class="header__right">
     <span class="live-dot {{ 'on' if mode == 'LIVE' else 'off' }}">{{ mode }}</span>
@@ -1170,58 +996,6 @@ body::before{
 
 <div class="content">
   <div class="data-grid">
-
-  <!-- ══ HONG SIGNAL RADAR ══ -->
-  <section class="signal-sec">
-    <div class="sec-label">
-      <span class="sec-tag">HONG SIGNAL RADAR</span>
-      <span class="sec-line"></span>
-    </div>
-    <div class="signal-card">
-      <div class="signal-card__head">
-        <div style="display:flex;align-items:center;gap:8px">
-          <span class="signal-card__title">수급 주도주 전략</span>
-          <span class="signal-card__badge off" id="signalBadge">--</span>
-          <button class="guide-btn" onclick="toggleGuide('guide-hong')" title="전략 설명">?</button>
-        </div>
-        <span class="signal-card__time" id="signalTime">--:--:--</span>
-      </div>
-      <div class="guide-panel" id="guide-hong" style="margin:0 26px"><div class="guide-inner">
-        <div class="guide-title">홍인기 수급 주도주 전략</div>
-        <div class="guide-text">
-          <p style="margin-bottom:12px"><strong>전략 개요</strong><br>
-          9:30 이후 <span class="guide-formula">거래대금 상위 50종목(ka10032)</span>에서 같은 업종이 3개 이상 묶이는 <strong>주도 섹터</strong>를 찾습니다.<br>
-          <span class="guide-formula">프로그램 매매 추이(ka90005)</span>의 기울기가 양전환&middot;가속하는지 확인하고,<br>
-          <span class="guide-formula">기관 가집계(ka10065)</span>가 전 회차 대비 연속 증가하는 종목만 최종 시그널로 선별합니다.</p>
-          <p style="margin-bottom:12px"><strong>시그널 레벨</strong><br>
-          &nbsp;&nbsp;&middot; <strong style="color:#B45309">STRONG</strong> = 프로그램 가속 + 기관 증가 + 주도섹터<br>
-          &nbsp;&nbsp;&middot; <strong style="color:#047857">ACTIVE</strong> = 프로그램 양전환 + 기관 증가 + 주도섹터<br>
-          &nbsp;&nbsp;&middot; <strong style="color:var(--tx-3)">WATCH</strong> = 기관 증가 + 주도섹터 (프로그램 미확인)</p>
-          <p><strong>깜빡임(Explosive)</strong>: 프로그램 가속 + 기관 가집계 5회 연속 증가 시 종목명이 점멸합니다.</p>
-        </div>
-      </div></div>
-      <div class="signal-card__body">
-        <div class="signal-panel">
-          <div class="sp-label">Program Flow</div>
-          <div class="sp-trend nodata" id="progTrend">LOADING</div>
-          <div class="sp-gauge-wrap"><div class="sp-gauge" id="progGauge" style="width:0"></div></div>
-          <div class="sp-stats">
-            <div class="sp-stat"><span class="sp-sl">Slope</span><span class="sp-sv" id="progSlope">--</span></div>
-            <div class="sp-stat"><span class="sp-sl">Cum Net</span><span class="sp-sv" id="progCumNet">--</span></div>
-            <div class="sp-stat"><span class="sp-sl">Pts</span><span class="sp-sv" id="progPts">--</span></div>
-          </div>
-        </div>
-        <div class="signal-panel">
-          <div class="sp-label">Leading Sectors</div>
-          <div class="sp-sectors" id="leadingSectors"><div class="sp-empty">Scanning...</div></div>
-        </div>
-        <div class="signal-panel">
-          <div class="sp-label">Signal Stocks</div>
-          <div class="sp-stocks" id="signalStocks"><div class="sp-empty">Scanning...</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ══ MARKET PULSE ══ -->
   <section class="pulse-sec">
@@ -1320,47 +1094,6 @@ body::before{
     </div>
   </section>
 
-  <!-- ══ IB SECTOR FLOW ══ -->
-  <section class="flow-sec">
-    <div class="sec-label"><span class="sec-tag">SECTOR FLOW BY IB</span><span class="sec-line"></span></div>
-    <div class="card" style="animation-delay:.23s">
-      <div class="card__head">
-        <span class="card__title">IB Sector Flow</span><button class="guide-btn" onclick="toggleGuide('guide-ibsector')" title="데이터 설명">?</button>
-        <span class="card__sub">MS &middot; JP &middot; GS &middot; TOP 종목 업종 합산</span>
-      </div>
-      <div class="guide-panel" id="guide-ibsector" style="margin:0 26px"><div class="guide-inner">
-        <div class="guide-title">IB Sector Flow — 외국계 IB별 업종 분포</div>
-        <div class="guide-text">
-          <p style="margin-bottom:12px"><strong>데이터 소스</strong><br>
-          <span class="guide-formula">ka10039</span> (회원사별매매상위종목)의 순매수/순매도 TOP 20 종목을<br>
-          <span class="guide-formula">ka20002</span> (업종별종목)로 업종 매핑한 뒤 업종별로 합산합니다.<br>
-          &nbsp;&nbsp;&middot; 각 기관의 5영업일 누적 순매수 TOP 20 + 순매도 TOP 20을 업종별로 집계<br>
-          &nbsp;&nbsp;&middot; 순매수 종목 금액은 (+), 순매도 종목 금액은 (-)로 상계</p>
-
-          <p style="margin-bottom:12px"><strong>차트 읽는 법</strong><br>
-          &nbsp;&nbsp;&middot; <strong style="color:var(--c-up)">우측 빨간 바</strong> = 해당 IB가 순매수 우위인 업종<br>
-          &nbsp;&nbsp;&middot; <strong style="color:var(--c-down)">좌측 파란 바</strong> = 해당 IB가 순매도 우위인 업종</p>
-
-          <p><strong>주의</strong>: TOP 20 종목 기반이므로 전체 매매를 완전히 반영하지는 않으나, 주요 포지션의 업종 편향을 파악할 수 있습니다.</p>
-        </div>
-      </div></div>
-      <div class="ib-sector-cols">
-        <div class="ib-sector-col">
-          <div class="ib-sector-col-hd"><div class="ib-col-logo ms">MS</div><div class="ib-col-nm">Morgan Stanley</div></div>
-          <div class="ib-sector-chart" id="ibSector-MS"><div class="empty-txt">Loading...</div></div>
-        </div>
-        <div class="ib-sector-col">
-          <div class="ib-sector-col-hd"><div class="ib-col-logo jp">JP</div><div class="ib-col-nm">JP Morgan</div></div>
-          <div class="ib-sector-chart" id="ibSector-JP"><div class="empty-txt">Loading...</div></div>
-        </div>
-        <div class="ib-sector-col">
-          <div class="ib-sector-col-hd"><div class="ib-col-logo gs">GS</div><div class="ib-col-nm">Goldman Sachs</div></div>
-          <div class="ib-sector-chart" id="ibSector-GS"><div class="empty-txt">Loading...</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ══ INSTITUTION DESK ══ -->
   <section class="flow-sec ib-section">
     <div class="sec-label"><span class="sec-tag">INSTITUTION DESK</span><span class="sec-line"></span></div>
@@ -1379,7 +1112,7 @@ body::before{
           키움증권 REST API <span class="guide-formula">ka10039</span> (회원사별 종목 매매순위)를 호출합니다.<br>
           &nbsp;&nbsp;&middot; 요청: 회원사 코드(mmcm_cd) + <strong>5영업일</strong>(dt=5) + 매수(trde_tp=1) / 매도(trde_tp=2)<br>
           &nbsp;&nbsp;&middot; 응답: 종목코드, 종목명, 순매수대금(netprps_amt), 등락률<br>
-          &nbsp;&nbsp;&middot; 각 기관별 순매수/순매도 금액이 큰 순서대로 최대 20종목을 표시합니다.</p>
+          &nbsp;&nbsp;&middot; 각 기관별 순매수/순매도 금액이 큰 순서대로 최대 5종목을 표시합니다.</p>
 
           <p style="margin-bottom:12px"><strong>금액</strong><br>
           netprps_amt의 원본 단위는 <span class="guide-formula">천원</span>이며, &divide;100,000 하여 <span class="guide-formula">억원</span>으로 표시합니다.<br>
@@ -1519,17 +1252,6 @@ body::before{
     </div>
   </section>
 
-  <!-- ══ DAILY RADAR REPORT ══ -->
-  <section class="reports-sec" id="reports">
-    <div class="sec-label"><span class="sec-tag">DAILY RADAR</span><span class="sec-line"></span></div>
-    <div class="archive-chips" id="archiveChips">
-      <span class="archive-label">Archive</span>
-    </div>
-    <div class="report-container" id="reportContainer">
-      <div class="report-loading">Loading report...</div>
-    </div>
-  </section>
-
   </div><!-- .data-grid -->
 </div>
 
@@ -1542,7 +1264,7 @@ body::before{
       <div class="sell-popup__title">
         <div class="sell-popup__logo" id="sellPopLogo"></div>
         <span class="sell-popup__nm" id="sellPopNm"></span>
-        <span class="sell-popup__tag">NET SELL TOP 20</span>
+        <span class="sell-popup__tag">NET SELL TOP 5</span>
       </div>
       <button class="sell-popup__close" id="sellPopClose">&times;</button>
     </div>
@@ -1573,17 +1295,13 @@ function toggleGuide(id){
 }
 
 /* ═══════════════════════════════════════════════════════
-   AX RADAR v5.2 — Daily Radar Engine
+   AX RADAR v5.3 — Daily Radar Engine
    ═══════════════════════════════════════════════════════ */
 (function(){
 'use strict';
 
 const REFRESH = {{ refresh_interval }};
 let timer = null;
-
-/* ── Report State ── */
-const reportCache = {};
-let currentDate = null;
 
 /* ── Sector Tab State ── */
 let sectorTabMode = 'foreign'; // 'foreign' | 'inst'
@@ -1612,8 +1330,6 @@ const API = {
   stock(c)     {return this._f('/api/v3/stock/'+c)},
   foreignTop() {return this._f('/api/v3/foreign-top')},
   foreignSector(){return this._f('/api/v3/foreign-sector')},
-  ibSector(){return this._f('/api/v3/ib-sector')},
-  hongSignal(m){return this._f('/api/v4/strategy/signals'+(m?'?market='+m:''))},
   accumulation(){return this._f('/api/v3/accumulation')},
   programTop(){return this._f('/api/v3/program-top')},
   article(cat,date){
@@ -1641,9 +1357,7 @@ function loadAll(){
   loadIdx();
   loadForeignTop();
   loadSectorFlow();
-  loadIbSector();
   loadInst();
-  loadHongSignal();
   loadAccumulation();
   loadProgramTop();
 }
@@ -1904,155 +1618,6 @@ function renderSectorChart(items){
   el.innerHTML=html;
 }
 
-/* ═══════════════ IB Sector Flow — Diverging Bar Chart per IB ═══════════════ */
-async function loadIbSector(){
-  try{
-    const d=await API.ibSector();
-    if(!d) throw new Error('No data');
-    ['MS','JP','GS'].forEach(function(k){
-      renderIbSectorChart('ibSector-'+k, d[k]||[]);
-    });
-  }catch(e){
-    console.error('ibSector',e);
-    ['MS','JP','GS'].forEach(function(k){
-      var el=document.getElementById('ibSector-'+k);
-      if(el) el.innerHTML='<div class="no-data">데이터를 불러올 수 없습니다</div>';
-    });
-  }
-}
-function renderIbSectorChart(elId,items){
-  var el=document.getElementById(elId);
-  if(!el)return;
-  if(!items.length){el.innerHTML='<div class="empty-txt">No data</div>';return}
-
-  var maxAmt=Math.max.apply(null,items.map(function(s){return Math.abs(s.amount||0)}))||1;
-  var html='';
-
-  items.forEach(function(s){
-    var amt=s.amount||0;
-    var pct=Math.round(Math.abs(amt)/maxAmt*100);
-    var isBuy=amt>0;
-    var isZero=amt===0;
-    var cls=isZero?'zero':(isBuy?'buy':'sell');
-    var sign=isBuy?'+':'';
-    var absAmt=Math.abs(amt);
-    var dispAmt=absAmt>=10000?(absAmt/10000).toFixed(1)+'\uC870':absAmt.toLocaleString('ko-KR')+'\uC5B5';
-
-    html+='<div class="ibs-row">';
-    html+='<div class="ibs-nm">'+s.sector+'</div>';
-    html+='<div class="ibs-bar-wrap">';
-    html+='<div class="ibs-bar-left">';
-    if(!isBuy&&!isZero) html+='<div class="ibs-bar sell" style="width:'+pct+'%"></div>';
-    html+='</div>';
-    html+='<div class="ibs-axis"></div>';
-    html+='<div class="ibs-bar-right">';
-    if(isBuy) html+='<div class="ibs-bar buy" style="width:'+pct+'%"></div>';
-    html+='</div>';
-    html+='</div>';
-    html+='<div class="ibs-amt '+cls+'">'+sign+dispAmt+'</div>';
-    html+='</div>';
-  });
-
-  el.innerHTML=html;
-}
-
-
-/* ═══════════════ Hong Signal Radar — 수급 주도주 전략 ═══════════════ */
-async function loadHongSignal(){
-  try{
-    var d=await API.hongSignal();
-    renderHongSignal(d);
-  }catch(e){
-    console.error('hongSignal',e);
-    var tEl=document.getElementById('progTrend');
-    if(tEl){tEl.textContent='DISCONNECTED';tEl.className='sp-trend negative'}
-    var sEl=document.getElementById('leadingSectors');
-    if(sEl)sEl.innerHTML='<div class="sp-empty">데이터 로드 실패</div>';
-    var kEl=document.getElementById('signalStocks');
-    if(kEl)kEl.innerHTML='<div class="sp-empty">데이터 로드 실패</div>';
-  }
-}
-function renderHongSignal(d){
-  if(!d)return;
-  /* Timestamp */
-  var timeEl=document.getElementById('signalTime');
-  if(timeEl&&d.timestamp){
-    var ts=d.timestamp.split(' ');
-    timeEl.textContent=ts[1]||d.timestamp;
-  }
-  /* Badge */
-  var badge=document.getElementById('signalBadge');
-  if(badge){
-    badge.className='signal-card__badge '+(d.marketHours?'live':'off');
-    badge.textContent=d.marketHours?'LIVE':'CLOSED';
-  }
-  /* Program Flow */
-  var prog=d.program||{};
-  var trendEl=document.getElementById('progTrend');
-  var gaugeEl=document.getElementById('progGauge');
-  var slopeEl=document.getElementById('progSlope');
-  var cumEl=document.getElementById('progCumNet');
-  var ptsEl=document.getElementById('progPts');
-  if(trendEl){
-    var trend=prog.trend||'NO_DATA';
-    var mp={'ACCELERATING':['ACCELERATING','accel'],'POSITIVE':['POSITIVE','positive'],
-      'FLAT':['FLAT','flat'],'NEGATIVE':['NEGATIVE','negative'],'NO_DATA':['NO DATA','nodata'],
-      'COLLECTING':['COLLECTING','positive']};
-    var t=mp[trend]||mp['NO_DATA'];
-    trendEl.textContent=t[0];trendEl.className='sp-trend '+t[1];
-  }
-  if(gaugeEl){
-    var sl=Math.abs(prog.slope||0);
-    var pct=Math.min(100,sl/50*100);
-    gaugeEl.style.width=Math.max(2,pct)+'%';
-    var tr=prog.trend||'flat';
-    gaugeEl.className='sp-gauge '+(tr==='ACCELERATING'?'accel':tr==='POSITIVE'?'positive':tr==='NEGATIVE'?'negative':'flat');
-  }
-  if(slopeEl)slopeEl.textContent=(prog.slope>0?'+':'')+prog.slope;
-  if(cumEl)cumEl.textContent=fNum(prog.cumNet||0);
-  if(ptsEl)ptsEl.textContent=prog.dataPoints||0;
-  /* Leading Sectors */
-  var secEl=document.getElementById('leadingSectors');
-  if(secEl){
-    var sectors=d.leadingSectors||{};
-    var keys=Object.keys(sectors);
-    if(!keys.length){
-      secEl.innerHTML='<div class="sp-empty">\uC8FC\uB3C4 \uC139\uD130 \uBBF8\uAC10\uC9C0</div>';
-    }else{
-      keys.sort(function(a,b){return sectors[b].count-sectors[a].count});
-      secEl.innerHTML=keys.map(function(k){
-        var s=sectors[k];
-        var names=s.stocks.map(function(st){return st.name}).join(', ');
-        return '<div><div class="sp-sector-tag">'
-          +'<span class="sp-sector-nm">'+k+'</span>'
-          +'<span class="sp-sector-cnt">'+s.count+'</span>'
-          +'</div>'
-          +'<div class="sp-sector-stocks" title="'+names+'">'+names+'</div></div>';
-      }).join('');
-    }
-  }
-  /* Signal Stocks */
-  var stkEl=document.getElementById('signalStocks');
-  if(stkEl){
-    var sigs=d.signals||[];
-    if(!sigs.length){
-      stkEl.innerHTML='<div class="sp-empty">\uC2DC\uADF8\uB110 \uC885\uBAA9 \uC5C6\uC74C</div>';
-    }else{
-      stkEl.innerHTML=sigs.map(function(s){
-        var expCls=s.explosive?' explosive':'';
-        var p=s.changePct||0;
-        var pc=p>0?'up':p<0?'dn':'fl';
-        return '<div class="sp-stk'+expCls+'" onclick="openMo(\''+s.code+'\')">'
-          +'<span class="sp-lvl '+s.level.toLowerCase()+'">'+s.level+'</span>'
-          +'<span class="sp-stk-nm">'+s.name+'</span>'
-          +'<span class="sp-stk-sec">'+s.sector+'</span>'
-          +'<span class="sp-stk-val '+pc+'">'+(p>0?'+':'')+p.toFixed(1)+'%</span>'
-          +'</div>';
-      }).join('');
-    }
-  }
-}
-
 
 /* ═══════════════ Program Trading TOP ═══════════════ */
 var _progData=null;
@@ -2244,7 +1809,7 @@ async function loadInst(){
       sellDataStore[k]=inst.sellTop||[];
       let html='';
       /* BUY section only */
-      html+='<div class="ib-sub-hd buy">Net Buy TOP 20</div>';
+      html+='<div class="ib-sub-hd buy">Net Buy TOP 5</div>';
       html+=rInstItems(inst.buyTop||[],false);
       /* Sell toggle button */
       const sellCnt=(inst.sellTop||[]).length;
@@ -2265,7 +1830,7 @@ async function loadInst(){
 }
 function rInstItems(stocks,isSell){
   if(!stocks||!stocks.length)return'<div class="empty-txt">No data</div>';
-  const topN=stocks.slice(0,20);
+  const topN=stocks.slice(0,5);
   const maxAmt=Math.max(...topN.map(s=>Math.abs(s.amount||0)))||1;
   return topN.map((s,i)=>{
     const p=s.changePct||0,pc=p>0?'up':p<0?'dn':'fl';
