@@ -3,6 +3,7 @@ AX RADAR v5.2 - Flask Application
 Daily Radar — Market Pulse + Foreign + Institution + Report
 """
 import logging
+import os
 import time
 from flask import Flask, render_template, jsonify, request
 
@@ -98,14 +99,14 @@ def api_v3_indices():
 
 @app.route("/api/v3/institutions")
 def api_v3_institutions():
-    """3사 순매수/순매도 TOP 20 · 5영업일 누적 (ka10039 dt=5)"""
+    """3사 순매수/순매도 TOP 5 · 5영업일 누적 (ka10039 dt=5)"""
     def fetch():
         result = {}
         for inst in ("MS", "JP", "GS"):
             inst_name = {"MS": "Morgan Stanley", "JP": "JP Morgan", "GS": "Goldman Sachs"}[inst]
             try:
-                buy_top = kiwoom.get_institution_top(inst, trade_type="1", days="5")[:20]
-                sell_top = kiwoom.get_institution_top(inst, trade_type="2", days="5")[:20]
+                buy_top = kiwoom.get_institution_top(inst, trade_type="1", days="5")[:5]
+                sell_top = kiwoom.get_institution_top(inst, trade_type="2", days="5")[:5]
             except Exception as e:
                 logger.warning(f"Institution [{inst}] data error: {e}")
                 buy_top = []
@@ -308,5 +309,6 @@ def api_v3_program_top():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=DEBUG)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=DEBUG)
 
