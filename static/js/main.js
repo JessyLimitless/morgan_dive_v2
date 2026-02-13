@@ -48,9 +48,18 @@ const API = {
   programTop(){return this._f('/api/v3/program-top')},
 };
 
+/* ── Splash ── */
+function splashMsg(txt){var el=document.getElementById('splashStatus');if(el)el.textContent=txt}
+function dismissSplash(){
+  var el=document.getElementById('splash');
+  if(!el||el.classList.contains('fade-out'))return;
+  el.classList.add('fade-out');
+  setTimeout(function(){el.style.display='none'},700);
+}
+
 /* ── Init ── */
 document.addEventListener('DOMContentLoaded',()=>{
-  loadAll();
+  loadAllInitial();
   timer=setInterval(loadAll,REFRESH);
   document.getElementById('mo').addEventListener('click',e=>{if(e.target.id==='mo')closeMo()});
   document.getElementById('mo-x').addEventListener('click',closeMo);
@@ -58,6 +67,19 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('sellPopClose').addEventListener('click',closeSellPopup);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMo();closeSellPopup()}});
 });
+
+async function loadAllInitial(){
+  clock();
+  splashMsg('Loading market indices...');
+  var p1=loadIdx().then(function(){splashMsg('Loading accumulation data...')});
+  var p2=loadForeignTop();
+  var p3=loadSectorFlow();
+  var p4=loadInst();
+  var p5=loadAccumulation();
+  var p6=loadProgramTop();
+  try{await Promise.all([p1,p2,p3,p4,p5,p6])}catch(e){}
+  dismissSplash();
+}
 
 function loadAll(){
   clock();

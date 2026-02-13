@@ -11,6 +11,16 @@
 {% block head %}{% endblock %}
 </head>
 <body {% block body_attrs %}{% endblock %}>
+  <!-- ══ Splash Loader ══ -->
+  <div id="splash" class="splash">
+    <div class="splash__inner">
+      <div class="splash__logo">AX</div>
+      <h2 class="splash__title">AX RADAR</h2>
+      <div class="splash__spinner"></div>
+      <p class="splash__status" id="splashStatus">Connecting to market data...</p>
+    </div>
+  </div>
+
   {% block content %}{% endblock %}
   {% block scripts %}{% endblock %}
 </body>

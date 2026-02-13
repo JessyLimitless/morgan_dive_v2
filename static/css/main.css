@@ -558,6 +558,43 @@ body::before{
 
 
 /* ================================================================
+   SPLASH LOADER — Full-screen intro
+   ================================================================ */
+.splash{
+  position:fixed;inset:0;z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#0F172A 0%,#1E293B 50%,#0F172A 100%);
+  transition:opacity .6s cubic-bezier(.22,1,.36,1),visibility .6s;
+}
+.splash.fade-out{opacity:0;visibility:hidden;pointer-events:none}
+.splash__inner{text-align:center;animation:splashIn .6s var(--ease) backwards}
+@keyframes splashIn{from{opacity:0;transform:scale(.95) translateY(10px)}}
+.splash__logo{
+  width:56px;height:56px;margin:0 auto 16px;
+  background:linear-gradient(135deg,#10B981,#059669);
+  border-radius:14px;display:flex;align-items:center;justify-content:center;
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;font-weight:800;color:#fff;
+  box-shadow:0 8px 32px rgba(16,185,129,.25);
+  animation:logoPulse 2s ease-in-out infinite;
+}
+@keyframes logoPulse{0%,100%{box-shadow:0 8px 32px rgba(16,185,129,.25)}50%{box-shadow:0 8px 40px rgba(16,185,129,.4)}}
+.splash__title{
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:1.4rem;font-weight:800;
+  letter-spacing:-.5px;color:#F1F5F9;margin-bottom:28px;
+}
+.splash__spinner{
+  width:32px;height:32px;margin:0 auto 18px;border-radius:50%;
+  border:3px solid rgba(255,255,255,.08);border-top-color:#10B981;
+  animation:spin .7s linear infinite;
+}
+.splash__status{
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;
+  color:#64748B;letter-spacing:.5px;
+  animation:statusBlink 1.5s ease-in-out infinite;
+}
+@keyframes statusBlink{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* ================================================================
    LOADING SPINNER
    ================================================================ */
 .loading-wrap{display:flex;align-items:center;justify-content:center;gap:10px;padding:36px 0}
