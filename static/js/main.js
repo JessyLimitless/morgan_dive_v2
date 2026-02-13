@@ -365,12 +365,12 @@ function renderWeightTop(items){
   var el=document.getElementById('weightTopBody');
   if(!el)return;
   var sorted=items.slice().sort(function(a,b){return(b.wght_change_5d||0)-(a.wght_change_5d||0)});
-  var top10=sorted.slice(0,10);
-  if(!top10.length){
+  var top20=sorted.slice(0,20);
+  if(!top20.length){
     el.innerHTML='<tr><td colspan="7" style="text-align:center;color:#64748B;padding:32px">No data</td></tr>';
     return;
   }
-  el.innerHTML=top10.map(function(s,i){
+  el.innerHTML=top20.map(function(s,i){
     var c5=s.wght_change_5d||0,c20=s.wght_change_20d||0;
     var c5cls=c5>=0?'tbl-pos':'tbl-neg';
     var c20cls=c20>=0?'tbl-pos':'tbl-neg';
