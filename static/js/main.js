@@ -407,12 +407,12 @@ async function loadConsecutiveBuy(){
 function renderConsecTop(items){
   var el=document.getElementById('consecTopBody');
   if(!el)return;
-  var top10=items.slice(0,10);
-  if(!top10.length){
+  var top20=items.slice(0,20);
+  if(!top20.length){
     el.innerHTML='<tr><td colspan="7" style="text-align:center;color:#64748B;padding:32px">No data</td></tr>';
     return;
   }
-  el.innerHTML=top10.map(function(s,i){
+  el.innerHTML=top20.map(function(s,i){
     var tot=s.tot||0;
     var totCls=tot>0?'tbl-pos':tot<0?'tbl-neg':'tbl-zero';
     /* D-1,D-2,D-3 순매수량 — 천주 단위를 만주로 변환해서 표시 */
