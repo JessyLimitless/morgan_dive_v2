@@ -1,0 +1,47 @@
+<!-- ══ INSTITUTION DESK ══ -->
+<section class="flow-sec ib-section">
+  <div class="sec-label"><span class="sec-tag">INSTITUTION DESK</span><span class="sec-line"></span></div>
+  <div class="card" style="animation-delay:.25s">
+    <div class="card__head">
+      <span class="card__title">Institution Desk</span><button class="guide-btn" onclick="toggleGuide('guide-inst')" title="데이터 설명">?</button>
+      <span class="card__sub">MS &middot; JP &middot; GS &middot; 5영업일 누적</span>
+    </div>
+    <div class="guide-panel" id="guide-inst" style="margin:0 26px"><div class="guide-inner">
+      <div class="guide-title">Institution Desk — 외국계 IB 5일 순매수/순매도</div>
+      <div class="guide-text">
+        <p style="margin-bottom:12px"><strong>왜 이 3개 기관인가?</strong><br>
+        Morgan Stanley(회원사 036), JP Morgan(033), Goldman Sachs(045)는 한국 시장에서 가장 활발하게 직접 매매하는 글로벌 투자은행입니다. 이들의 자기자본 매매(Proprietary Trading)는 대형 기관 전략을 반영하며, 단순 위탁 매매와 달리 자체 투자 판단이 담긴 매수 신호로 해석됩니다.</p>
+
+        <p style="margin-bottom:12px"><strong>데이터 수집</strong><br>
+        키움증권 REST API <span class="guide-formula">ka10039</span> (회원사별 종목 매매순위)를 호출합니다.<br>
+        &nbsp;&nbsp;&middot; 요청: 회원사 코드(mmcm_cd) + <strong>5영업일</strong>(dt=5) + 매수(trde_tp=1) / 매도(trde_tp=2)<br>
+        &nbsp;&nbsp;&middot; 응답: 종목코드, 종목명, 순매수대금(netprps_amt), 등락률<br>
+        &nbsp;&nbsp;&middot; 각 기관별 순매수/순매도 금액이 큰 순서대로 최대 5종목을 표시합니다.</p>
+
+        <p style="margin-bottom:12px"><strong>금액</strong><br>
+        netprps_amt의 원본 단위는 <span class="guide-formula">천원</span>이며, &divide;100,000 하여 <span class="guide-formula">억원</span>으로 표시합니다.<br>
+        &nbsp;&nbsp;&middot; <strong>+181억</strong> → 해당 기관이 5영업일간 약 181억원 순매수<br>
+        &nbsp;&nbsp;&middot; 금액은 5일간 누적 순매수대금 (매수총액 − 매도총액)</p>
+
+        <p><strong>바 차트</strong>: 각 기관 내 1위 대비 상대 비중을 시각화합니다.<br>
+        &nbsp;&nbsp;&middot; <strong style="color:var(--c-up)">빨간색 바</strong> = 해당 종목 주가 상승 중 (매수 + 주가↑)<br>
+        &nbsp;&nbsp;&middot; <strong style="color:var(--c-down)">파란색 바</strong> = 해당 종목 주가 하락 중 (매수 + 주가↓ = 저점 매집 가능성)</p>
+        <p>종목을 클릭하면 현재가&middot;등락률&middot;시가총액 등 상세 팝업을 볼 수 있습니다.</p>
+      </div>
+    </div></div>
+    <div class="ib-cols">
+      <div class="ib-col">
+        <div class="ib-col-hd"><div class="ib-col-logo ms">MS</div><div><div class="ib-col-nm">Morgan Stanley</div><div class="ib-col-cd">036</div></div></div>
+        <div class="ib-col-list" id="MS-col"></div>
+      </div>
+      <div class="ib-col">
+        <div class="ib-col-hd"><div class="ib-col-logo jp">JP</div><div><div class="ib-col-nm">JP Morgan</div><div class="ib-col-cd">033</div></div></div>
+        <div class="ib-col-list" id="JP-col"></div>
+      </div>
+      <div class="ib-col">
+        <div class="ib-col-hd"><div class="ib-col-logo gs">GS</div><div><div class="ib-col-nm">Goldman Sachs</div><div class="ib-col-cd">045</div></div></div>
+        <div class="ib-col-list" id="GS-col"></div>
+      </div>
+    </div>
+  </div>
+</section>

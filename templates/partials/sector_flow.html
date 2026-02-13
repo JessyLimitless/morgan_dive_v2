@@ -1,0 +1,34 @@
+<!-- ══ SECTOR FLOW ══ -->
+<section class="flow-sec">
+  <div class="sec-label"><span class="sec-tag">SECTOR FLOW</span><span class="sec-line"></span></div>
+  <div class="card" style="animation-delay:.22s">
+    <div class="card__head">
+      <span class="card__title">Sector Flow</span><button class="guide-btn" onclick="toggleGuide('guide-sector')" title="데이터 설명">?</button>
+      <div class="sector-tabs">
+        <button class="sector-tab active" data-tab="foreign" onclick="switchSectorTab('foreign')">Foreign</button>
+        <button class="sector-tab" data-tab="inst" onclick="switchSectorTab('inst')">Institution</button>
+      </div>
+      <span class="card__sub">KOSPI 18개 업종 &middot; ka10051</span>
+    </div>
+    <div class="guide-panel" id="guide-sector" style="margin:0 26px"><div class="guide-inner">
+      <div class="guide-title">Sector Flow — 업종별 외국인/기관 순매수·순매도</div>
+      <div class="guide-text">
+        <p style="margin-bottom:12px"><strong>데이터 소스</strong><br>
+        키움 REST API <span class="guide-formula">ka10051</span> (업종별투자자순매수요청)을 호출합니다.<br>
+        &nbsp;&nbsp;&middot; 한 번의 호출로 KOSPI <strong>18개 산업 업종</strong>의 외국인·기관 순매수를 동시에 가져옵니다<br>
+        &nbsp;&nbsp;&middot; <strong>Foreign</strong> 탭: <span class="guide-formula">frgnr_netprps</span> (외국인 순매수)<br>
+        &nbsp;&nbsp;&middot; <strong>Institution</strong> 탭: <span class="guide-formula">orgn_netprps</span> (기관 합산 순매수)</p>
+
+        <p style="margin-bottom:12px"><strong>차트 읽는 법</strong><br>
+        &nbsp;&nbsp;&middot; <strong style="color:var(--c-up)">우측 빨간 바</strong> = 순매수 업종 (자금 유입)<br>
+        &nbsp;&nbsp;&middot; <strong style="color:var(--c-down)">좌측 파란 바</strong> = 순매도 업종 (자금 유출)<br>
+        &nbsp;&nbsp;&middot; 바 길이는 최대값 대비 상대 비율</p>
+
+        <p><strong>활용</strong>: 외국인/기관 자금이 어느 업종에 몰리고 빠지는지 한눈에 파악하여 <strong>섹터 로테이션</strong>을 읽을 수 있습니다.</p>
+      </div>
+    </div></div>
+    <div class="card__body">
+      <div class="sector-chart" id="sectorChart"><div class="empty-txt">Loading...</div></div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+<!-- ══ STEALTH ACCUMULATION ══ -->
+<section class="flow-sec">
+  <div class="sec-label"><span class="sec-tag">STEALTH ACCUMULATION</span><span class="sec-line"></span></div>
+  <div class="stealth-zone" style="animation-delay:.28s">
+    <div class="card__head">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="card__title">Foreign Accumulation Radar</span>
+        <button class="guide-btn" onclick="toggleGuide('guide-accum')" title="데이터 설명">?</button>
+      </div>
+      <span class="card__sub">외국인 스텔스 축적 &middot; 2분 갱신</span>
+    </div>
+    <div class="guide-panel" id="guide-accum" style="margin:0"><div class="guide-inner">
+      <div class="guide-title">Foreign Accumulation Radar — 외국인 스텔스 축적 스캐너</div>
+      <div class="guide-text">
+        <p style="margin-bottom:12px"><strong>전략 개요</strong><br>
+        외국인 한도소진율이 급증하면서 조용히 지분을 늘리고 있는 종목을 포착합니다.<br>
+        3개 키움 API를 순차 호출하여 교차 분석합니다:<br>
+        &nbsp;&nbsp;① <span class="guide-formula">ka10036</span> 한도소진율증가상위 &rarr; 후보 종목 스크리닝<br>
+        &nbsp;&nbsp;② <span class="guide-formula">ka10008</span> 외국인종목별매매동향 &rarr; 비중 시계열 상세 조회<br>
+        &nbsp;&nbsp;③ <span class="guide-formula">ka10034</span> 외인기간별매매상위 &rarr; 순매수 순위 확인</p>
+
+        <p style="margin-bottom:12px"><strong>Accumulation Score (0~100)</strong> — 5개 항목 가중합산<br>
+        &nbsp;&nbsp;&middot; <strong>비중변화(30점)</strong>: 최근 5일/20일간 외국인 지분율 증가폭<br>
+        &nbsp;&nbsp;&middot; <strong>소진율(25점)</strong>: 외국인 투자한도 소진율의 상승폭이 클수록 고점수<br>
+        &nbsp;&nbsp;&middot; <strong>연속매수(20점)</strong>: 외국인이 연속으로 순매수한 일수 (5일 이상이면 만점)<br>
+        &nbsp;&nbsp;&middot; <strong>순위(15점)</strong>: 외국인 기간별 순매수 순위가 높을수록 고점수<br>
+        &nbsp;&nbsp;&middot; <strong>거래비중(10점)</strong>: 전체 거래량 중 외국인 비중이 높을수록 고점수</p>
+
+        <p style="margin-bottom:12px"><strong>Grade</strong>: <strong style="color:#F59E0B">S</strong>(80+) &middot; <strong style="color:#10B981">A</strong>(60+) &middot; <strong style="color:#3B82F6">B</strong>(40+) &middot; C(20+) &middot; D(&lt;20)</p>
+
+        <p style="margin-bottom:12px"><strong>테이블 컬럼 해설</strong><br>
+        &nbsp;&nbsp;&middot; <strong>비중(현재)</strong>: 현재 외국인 지분율 (%)<br>
+        &nbsp;&nbsp;&middot; <strong>5D / 20D</strong>: 최근 5영업일 / 20영업일간 외국인 비중 변화 (%p)<br>
+        &nbsp;&nbsp;&middot; <strong>소진율↑</strong>: 외국인 투자한도 소진율 증가폭 (%p)<br>
+        &nbsp;&nbsp;&middot; <strong>연속매수</strong>: 외국인이 연속으로 순매수한 일수<br>
+        &nbsp;&nbsp;&middot; <strong>추이</strong>: 외국인 비중 변화 추이 스파크라인 (20일간)</p>
+
+        <p><strong>Signal</strong>:<br>
+        &nbsp;&nbsp;&middot; <strong style="color:#F59E0B">STEALTH CONVICTION</strong> — Score 80+ 핵심 축적 종목<br>
+        &nbsp;&nbsp;&middot; <strong style="color:#10B981">ACTIVE ACCUMULATION</strong> — Score 60+ 적극 매집 중<br>
+        &nbsp;&nbsp;&middot; <strong style="color:#3B82F6">BUILDING POSITION</strong> — Score 40+ 포지션 구축 단계<br>
+        &nbsp;&nbsp;&middot; <strong>WATCHING</strong> — Score 40 미만, 관찰 단계</p>
+      </div>
+    </div></div>
+    <div id="accumCards" class="accum-cards"><div class="loading-wrap loading-wrap--dark"><span class="spinner spinner--dark"></span><span class="loading-txt loading-txt--dark">Loading accumulation data...</span></div></div>
+  </div>
+</section>

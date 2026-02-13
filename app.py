@@ -216,13 +216,13 @@ def api_v4_strategy_signals():
 
 @app.route("/api/v3/accumulation")
 def api_v3_accumulation():
-    """Foreign Accumulation Radar — 외국인 스텔스 축적 TOP 15"""
+    """Foreign Accumulation Radar — 외국인 스텔스 축적 TOP 30"""
     cache_key = "accumulation_radar"
     try:
         cached = kiwoom._get_cache(cache_key, ttl=120)
         if cached is not None:
             return jsonify({"status": "ok", "data": cached, "cached": True})
-        data = accumulation_engine.analyze(top_n=15)
+        data = accumulation_engine.analyze(top_n=30)
         kiwoom._set_cache(cache_key, data)
         return jsonify({"status": "ok", "data": data})
     except Exception as e:
