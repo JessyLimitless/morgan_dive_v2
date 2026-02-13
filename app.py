@@ -245,6 +245,20 @@ def api_v3_accumulation_detail(stk_cd):
 
 
 # ═══════════════════════════════════════════════════════════════════
+#  Foreign Consecutive Buy Top API (ka10035)
+# ═══════════════════════════════════════════════════════════════════
+
+@app.route("/api/v3/consecutive-buy")
+def api_v3_consecutive_buy():
+    """외인 연속 순매수 상위 (ka10035)"""
+    return _cached_api(
+        "consecutive_buy",
+        lambda: kiwoom.get_foreign_consecutive_buy("000"),
+        "Consecutive Buy API",
+    )
+
+
+# ═══════════════════════════════════════════════════════════════════
 #  Program Trading TOP 50 API
 # ═══════════════════════════════════════════════════════════════════
 

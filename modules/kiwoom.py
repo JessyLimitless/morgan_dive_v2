@@ -399,6 +399,55 @@ class KiwoomLogic:
         self._set_cache("ib_sector_flow", result)
         return result
 
+    # ═══════════════ Foreign Consecutive Buy Top (ka10035) ═══════════════
+
+    def get_foreign_consecutive_buy(self, mrkt_tp: str = "000") -> list:
+        """
+        ka10035: 외인연속순매매상위 — 연속 순매수 상위 종목.
+
+        Args:
+            mrkt_tp: "000"=전체, "001"=코스피, "101"=코스닥
+
+        Returns: [{rank, stk_cd, stk_nm, cur_prc, flu_rt, dm1, dm2, dm3, tot, limit_exh_rt}, ...]
+        """
+        data = self._api.call("ka10035", "/api/dostk/rkinfo", {
+            "mrkt_tp": mrkt_tp,
+            "trde_tp": "2",        # 2 = 연속순매수
+            "base_dt_tp": "1",     # 1 = 당일기준
+            "stex_tp": "1",        # 1 = KRX
+        })
+
+        items = data.get("for_cont_nettrde_upper", [])
+        if not items:
+            for k, v in data.items():
+                if isinstance(v, list) and v and isinstance(v[0], dict):
+                    items = v
+                    break
+
+        result = []
+        for i, row in enumerate(items):
+            cd = str(row.get("stk_cd", "")).replace("_NX", "").replace("_AL", "").strip()
+            if not cd or len(cd) != 6:
+                continue
+            cur_prc = abs(self._parse_int(row.get("cur_prc", "0")))
+            pred_pre = self._parse_int(row.get("pred_pre", "0"))
+            flu_rt = round(pred_pre / cur_prc * 100, 2) if cur_prc else 0
+
+            result.append({
+                "rank": i + 1,
+                "stk_cd": cd,
+                "stk_nm": str(row.get("stk_nm", "")).strip(),
+                "cur_prc": cur_prc,
+                "pred_pre_sig": str(row.get("pred_pre_sig", "3")),
+                "flu_rt": flu_rt,
+                "dm1": self._parse_int(row.get("dm1", "0")),
+                "dm2": self._parse_int(row.get("dm2", "0")),
+                "dm3": self._parse_int(row.get("dm3", "0")),
+                "tot": self._parse_int(row.get("tot", "0")),
+                "limit_exh_rt": self._parse_float(row.get("limit_exh_rt", "0")),
+            })
+        return result
+
     # ═══════════════ Market Indices (yfinance) ═══════════════
 
     def get_market_indices(self) -> dict:

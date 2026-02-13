@@ -45,6 +45,7 @@ const API = {
   foreignTop() {return this._f('/api/v3/foreign-top')},
   foreignSector(){return this._f('/api/v3/foreign-sector')},
   accumulation(){return this._f('/api/v3/accumulation')},
+  consecutiveBuy(){return this._f('/api/v3/consecutive-buy')},
   programTop(){return this._f('/api/v3/program-top')},
 };
 
@@ -77,7 +78,8 @@ async function loadAllInitial(){
   var p4=loadInst();
   var p5=loadAccumulation();
   var p6=loadProgramTop();
-  try{await Promise.all([p1,p2,p3,p4,p5,p6])}catch(e){}
+  var p7=loadConsecutiveBuy();
+  try{await Promise.all([p1,p2,p3,p4,p5,p6,p7])}catch(e){}
   dismissSplash();
 }
 
@@ -89,6 +91,7 @@ function loadAll(){
   loadInst();
   loadAccumulation();
   loadProgramTop();
+  loadConsecutiveBuy();
 }
 
 function clock(){
@@ -352,7 +355,6 @@ async function loadAccumulation(){
     _accumData=d;
     renderAccumCards(d.slice(0,5));
     renderWeightTop(d);
-    renderConsecTop(d);
   }catch(e){
     console.error('accumulation',e);
     document.getElementById('accumCards').innerHTML='<div class="stealth-empty">데이터를 불러올 수 없습니다</div>';
@@ -390,27 +392,43 @@ function renderWeightTop(items){
   },100);
 }
 
+/* ═══════════════ Consecutive Buy TOP (ka10035) ═══════════════ */
+async function loadConsecutiveBuy(){
+  try{
+    var d=await API.consecutiveBuy();
+    renderConsecTop(d||[]);
+  }catch(e){
+    console.error('consecutiveBuy',e);
+    var el=document.getElementById('consecTopBody');
+    if(el)el.innerHTML='<tr><td colspan="7" style="text-align:center;color:#64748B;padding:32px">\uB370\uC774\uD130\uB97C \uBD88\uB7EC\uC62C \uC218 \uC5C6\uC2B5\uB2C8\uB2E4</td></tr>';
+  }
+}
+
 function renderConsecTop(items){
   var el=document.getElementById('consecTopBody');
   if(!el)return;
-  var sorted=items.slice().sort(function(a,b){return(b.consecutive_days||0)-(a.consecutive_days||0)});
-  var top10=sorted.slice(0,10);
+  var top10=items.slice(0,10);
   if(!top10.length){
     el.innerHTML='<tr><td colspan="7" style="text-align:center;color:#64748B;padding:32px">No data</td></tr>';
     return;
   }
   el.innerHTML=top10.map(function(s,i){
-    var c5=s.wght_change_5d||0;
-    var c5cls=c5>=0?'tbl-pos':'tbl-neg';
-    var sigCls=s.signal?s.signal.toLowerCase():'';
+    var tot=s.tot||0;
+    var totCls=tot>0?'tbl-pos':tot<0?'tbl-neg':'tbl-zero';
+    /* D-1,D-2,D-3 순매수량 — 천주 단위를 만주로 변환해서 표시 */
+    function fQty(v){
+      if(!v)return'-';
+      var a=Math.abs(v);
+      return(v>0?'+':'-')+(a>=1000?(a/1000).toFixed(0)+'천':a.toLocaleString('ko-KR'));
+    }
     return '<tr onclick="openMo(\''+s.stk_cd+'\')">'
-      +'<td>'+(i+1)+'</td>'
+      +'<td>'+s.rank+'</td>'
       +'<td class="tbl-nm">'+s.stk_nm+'</td>'
-      +'<td class="tbl-score">'+(s.consecutive_days||0)+'일</td>'
-      +'<td>'+(s.wght_now||0).toFixed(2)+'%</td>'
-      +'<td class="'+c5cls+'">'+(c5>=0?'+':'')+c5+'%p</td>'
-      +'<td class="tbl-score">'+s.accumulation_score+'</td>'
-      +'<td><span class="accum-signal '+sigCls+'">'+s.signal.replace(/_/g,' ')+'</span></td>'
+      +'<td>'+fNum(s.cur_prc)+'</td>'
+      +'<td class="tbl-pos">'+fQty(s.dm1)+'</td>'
+      +'<td class="tbl-pos">'+fQty(s.dm2)+'</td>'
+      +'<td class="tbl-pos">'+fQty(s.dm3)+'</td>'
+      +'<td class="'+totCls+'">'+fQty(s.tot)+'</td>'
     +'</tr>';
   }).join('');
 }
